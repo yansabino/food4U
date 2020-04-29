@@ -1,22 +1,34 @@
 import { UserGateway } from "../../gateways/userGateway";
-import * as bcrypt from "bcrypt";
 import { MinimumCharacterError } from "../../Error/MinimumCharacterError";
+import { CryptographyGateway } from "../../gateways/cryptographyGateway";
+import { AuthenticationGateway } from "../../gateways/authenticationGateway";
 
 export class UpdateUserPasswordUC {
-  constructor(private usergateway: UserGateway) {}
+  constructor(
+    private usergateway: UserGateway,
+    private authenticationGateway: AuthenticationGateway,
+    private cryptographyGateway: CryptographyGateway
+  ) {}
 
-  async execute(input: UpdateUserInput) {
-    const user = await this.usergateway.getUserById(input.id);
+  async execute(input: UpdateUserInput): Promise<UpdateUserOutPut> {
+
+    if (!input.token) {
+      throw new Error("Missing Auth Token");
+    }
+
+    const userInfo = this.authenticationGateway.verifyToken(input.token);
+    const id = userInfo.id;
+    const user = await this.usergateway.getUserById(id);
 
     if (!user) {
       throw new Error("usuario não encontrado");
     }
 
-    const compare = await bcrypt.compare(
+    const isPasswordCorrect = await this.cryptographyGateway.compare(
       input.previousPassword,
       user.getPassword()
     );
-    if (!compare) {
+    if (!isPasswordCorrect) {
       throw new Error("senha incompativel");
     }
 
@@ -24,16 +36,24 @@ export class UpdateUserPasswordUC {
       throw new MinimumCharacterError();
     }
 
-    const SALT_ROUNDS = 10;
-    const hashPassword = await bcrypt.hash(input.newPassword, SALT_ROUNDS);
+    const password = await this.cryptographyGateway.encrypt(input.newPassword);
+    await this.usergateway.updateUserPassword(user.getId(), password);
 
-    await this.usergateway.updateUserPassword(hashPassword, input.id);
-    return { message: "Senha alterada" };
+    const token = this.authenticationGateway.generateToken({
+      id: user.getId(),
+    });
+
+    return { message: "Senha alterada", token };
   }
 }
 
 export interface UpdateUserInput {
   newPassword: string;
   previousPassword: string;
-  id: string;
+  token: string;
+}
+
+export interface UpdateUserOutPut {
+  message: string;
+  token: string;
 }
