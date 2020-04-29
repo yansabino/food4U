@@ -13,7 +13,7 @@ export class CreateRecipeUC {
       input.title,
       new Date(),
       input.description,
-      input.userId
+      input.id
     );
     await this.recipeGateway.createRecipe(newRecipe);
   }
@@ -26,5 +26,5 @@ export class CreateRecipeUC {
 export interface CreateRecipeInput {
   title: string;
   description: string;
-  userId: string;
+  id: string;
 }

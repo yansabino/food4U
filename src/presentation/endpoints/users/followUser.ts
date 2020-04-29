@@ -14,7 +14,7 @@ export const followUserEndpoint = async (req: Request, res: Response) => {
     const useCase = new FollowUserUC(userDataBase);
 
     const input = {
-      userId,
+      userId: userId.id,
       followedId: req.body.followedId
     };
     console.log(input);

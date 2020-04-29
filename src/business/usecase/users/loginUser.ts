@@ -1,6 +1,4 @@
 import { UserGateway } from "../../gateways/userGateway";
-import * as bcrypt from "bcrypt";
-import * as jwt from "jsonwebtoken";
 import { CryptographyGateway } from "../../gateways/cryptographyGateway";
 import { AuthenticationGateway } from "../../gateways/authenticationGateway";
 

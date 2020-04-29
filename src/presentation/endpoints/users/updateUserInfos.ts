@@ -13,7 +13,7 @@ export const updateUserPasswordEndpoint = async (req: Request,res: Response) => 
       email: req.body.email,
       name: req.body.name,
       birthday: req.body.birthday,
-      id: userId
+      id: userId.id
     };
 
     const result = await updateUserInfosUC.execute(input);

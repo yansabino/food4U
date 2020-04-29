@@ -13,7 +13,7 @@ export const getFeedEndpoint = async (req: Request, res: Response) => {
     const userId = jwtAuth.verifyToken(req.headers.auth as string);
 
     const input = {
-      userId
+      userId: userId.id
     };
 
     const result = await getFeedUC.execute(input);
