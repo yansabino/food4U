@@ -16,8 +16,8 @@ export const loginUserEndpoint = async (req: Request, res: Response) => {
   };
 
   try {
-    const token = await loginUserUC.execute(input);
-    res.send({ message: "Usuario logado com sucesso", token });
+    const result = await loginUserUC.execute(input);
+    res.send({ message: "Usuario logado com sucesso", result });
   } catch (err) {
     res.status(400).send({
       message: err.message,

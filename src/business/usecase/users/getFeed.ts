@@ -19,14 +19,16 @@ export class GetFeedUC {
   }
 }
 
+export interface GetFeedInput {
+  userId: string;
+}
+
 export interface GetFeedOutput {
   id: string;
   title: string;
   description: string;
-  creationDate: number;
+  creationDate: Date;
   userId: string;
   userEmail: string;
 }
-export interface GetFeedInput {
-  userId: string;
-}
+

@@ -5,7 +5,7 @@ export class FeedRecipe extends Recipe {
     id: string,
     title: string,
     description: string,
-    creationDate: number,
+    creationDate: Date,
     userId: string,
     private userEmail: string
   ) {

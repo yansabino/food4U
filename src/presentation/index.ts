@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import { createUserEndpoint } from "./endpoints/users/createUser";
 import { loginUserEndpoint } from "./endpoints/users/loginUser";
 import { getUserInfoEndpoint } from "./endpoints/users/getUserInfo";

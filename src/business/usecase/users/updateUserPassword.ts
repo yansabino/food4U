@@ -36,24 +36,23 @@ export class UpdateUserPasswordUC {
       throw new MinimumCharacterError();
     }
 
-    const password = await this.cryptographyGateway.encrypt(input.newPassword);
-    await this.usergateway.updateUserPassword(user.getId(), password);
+    const pass = await this.cryptographyGateway.encrypt(input.newPassword);
+    await this.usergateway.updateUserPassword(user.getId(), pass);
 
     const token = this.authenticationGateway.generateToken({
       id: user.getId(),
     });
 
-    return { message: "Senha alterada", token };
+    return { token };
   }
 }
 
 export interface UpdateUserInput {
+  token: string;
   newPassword: string;
   previousPassword: string;
-  token: string;
 }
 
-export interface UpdateUserOutPut {
-  message: string;
+export interface UpdateUserOutPut {  
   token: string;
 }

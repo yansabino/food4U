@@ -71,10 +71,12 @@ export class UserDB extends BaseDB implements UserGateway {
     );
   }
 
-  async updateUserPassword(newpassword: string, id: string): Promise<void> {
-    await this.connection.raw(
-      `update user set password='${newpassword}' where id='${id}';`
-    );
+  async updateUserPassword(id: string, newpassword: string): Promise<void> {
+    await this.connection.raw(`
+      UPDATE ${this.userTableName} 
+      SET password='${newpassword}' 
+      WHERE id='${id}';
+    `);
   }
 
   async updateUserInfos(

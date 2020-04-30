@@ -7,9 +7,7 @@ export const getFeedEndpoint = async (req: Request, res: Response) => {
   try {
     const feedDataBase = new FeedDB();
     const getFeedUC = new GetFeedUC(feedDataBase);
-
     const jwtAuth = new JWTAuthentication();
-
     const userId = jwtAuth.verifyToken(req.headers.auth as string);
 
     const input = {
@@ -17,8 +15,7 @@ export const getFeedEndpoint = async (req: Request, res: Response) => {
     };
 
     const result = await getFeedUC.execute(input);
-
-    res.send({ result });
+    res.status(200).send({ result });
   } catch (err) {
     res.status(400).send({
       message: err.message,

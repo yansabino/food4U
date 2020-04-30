@@ -16,7 +16,7 @@ export class FeedDB extends BaseDB implements FeedGateway {
         WHERE follower_id='${userId}'
         ORDER BY ${this.recipeTableName}.creationDate DESC;
         `);
-
+    
     return response[0].map((recipe: any) => {
       return new FeedRecipe(
         recipe.id,
