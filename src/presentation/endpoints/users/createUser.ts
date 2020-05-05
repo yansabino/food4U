@@ -10,7 +10,7 @@ export const createUserEndpoint = async (req: Request, res: Response) => {
       new UserDB(),
       new JWTAuthentication(),
       new BcryptService()
-      );
+    );
     const result = await createUserUC.execute({
       email: req.body.email,
       password: req.body.password,

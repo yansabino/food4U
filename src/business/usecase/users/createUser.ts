@@ -47,6 +47,7 @@ export class CreateUserUC {
 
     const token = this.authenticationGateway.generateToken({
       id: user.getId(),
+      email: user.getEmail()
     });
 
     return {

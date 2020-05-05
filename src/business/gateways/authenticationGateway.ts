@@ -7,5 +7,6 @@ export interface AuthenticationGateway {
   
   export interface UsersInfoForToken {
     id: string;
+    email: string;
   }
   

@@ -6,7 +6,8 @@ export const getUserInfoEndpoint = async (req: Request, res: Response) => {
     const jwtAuth = new JWTAuthentication()
     const userId = jwtAuth.verifyToken(req.headers.auth as string)
     const input = {
-      id: userId.id
+      id: userId.id,
+      email: userId.email
     }
     res.status(200).send(input);
   } catch (err) {

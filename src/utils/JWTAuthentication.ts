@@ -11,7 +11,7 @@ export class JWTAuthentication implements AuthenticationGateway {
   private expiresIn = "10h";
 
   generateToken(input: UsersInfoForToken): string {
-    return jwt.sign({ id: input.id }, this.SECRET_KEY, {
+    return jwt.sign({ id: input.id, email: input.email }, this.SECRET_KEY, {
       expiresIn: this.expiresIn,
     });
   }
@@ -19,6 +19,6 @@ export class JWTAuthentication implements AuthenticationGateway {
   verifyToken(token: string): UsersInfoForToken {
     const result = jwt.verify(token, this.SECRET_KEY) as UsersInfoForToken;
 
-    return { id: result.id };
+    return { id: result.id, email: result.email };
   }
 }
