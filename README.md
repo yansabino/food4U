@@ -11,7 +11,7 @@ Por fim, ressalta-se que a comunicação da camada `Data` e a `Business` é feit
 Esse foi um projeto de Backend que utilizei para reproduzir o funcionamento do sistema de uma Rede de Receitas, nele é possivel se cadastrar, fazer login, atualizar a senha de usuário, e seguir outros usuarios cadastrados. Além disso o usuário pode criar receitas e ver o feed com todas as receitas de todos os usuários.
 
 ## Instruções para rodar
-
+### OBS: para rodar o projeto são necessarias as informações do banco de dados e a chave do token, caso queira, por favor entrar em contato comigo por esse email que eu enviarei o arquivo `.env`.
 - Clone o Repositório e com ele em sua máquina: `git clone https://github.com/yansabino/food4U-backend.git`
 - Agora basta abrir o terminal e navegar até o repositório: `cd food4U`
 - E então instala-lo e rodar-lo:
